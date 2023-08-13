@@ -12,6 +12,7 @@ public class AmritaTipsyDbContext : DbContext
     }
     
     public DbSet<ContactType> ContactTypes { get; set; } = null!;
+    public DbSet<Country> Countries { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -8,4 +8,6 @@ public class Country
     public string? Iso3Code { get; set; }
     public short? NumericCode { get; set; }
     public short PhoneCode { get; set; }
+    
+    public ICollection<State> States => null!;
 }

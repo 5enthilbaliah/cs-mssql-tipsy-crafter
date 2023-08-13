@@ -49,5 +49,10 @@ public class CountrySpecifications : IEntityTypeConfiguration<Country>
         builder.Property(country => country.PhoneCode)
             .HasColumnName("phone_code")
             .HasColumnType("smallint");
+
+        builder.HasMany(country => country.States)
+            .WithOne(state => state.Country)
+            .HasForeignKey(state => state.CountryId)
+            .HasPrincipalKey(country => country.Id);
     }
 }

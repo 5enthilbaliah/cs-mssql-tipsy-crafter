@@ -11,4 +11,5 @@ public class Category
     public Category? ParentCategory { get; set; }
     
     public ICollection<Category> Children => null!;
+    public ICollection<ProductType> ProductTypes => null!;
 }

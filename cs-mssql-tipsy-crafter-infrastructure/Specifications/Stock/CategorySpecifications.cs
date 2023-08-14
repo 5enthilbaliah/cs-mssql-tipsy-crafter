@@ -52,5 +52,11 @@ public class CategorySpecifications  : IEntityTypeConfiguration<Category>
             .HasForeignKey(child => child.ParentId)
             .HasPrincipalKey(category => category.Id)
             .OnDelete(DeleteBehavior.Restrict);
+        
+        builder.HasMany(category => category.ProductTypes)
+            .WithOne(productType => productType.Category)
+            .HasForeignKey(productType => productType.CategoryId)
+            .HasPrincipalKey(category => category.Id)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

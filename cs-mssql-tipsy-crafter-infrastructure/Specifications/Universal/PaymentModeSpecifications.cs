@@ -36,5 +36,13 @@ public class PaymentModeSpecifications : IEntityTypeConfiguration<PaymentMode>
             .HasColumnName("description")
             .HasColumnType("varchar(200)")
             .HasMaxLength(200);
+
+        builder.HasData(new PaymentMode { Id = "01H7PCVP1HGHM93SX4HSW8EM2B", Name = "Cash", Description = "Cash" },
+            new PaymentMode { Id = "01H7PCVQ1ERMXJJND16HKKHTKQ", Name = "Cheque", Description = "Cheque / Check" },
+            new PaymentMode
+            {
+                Id = "01H7PCVR0R9723KKDRKGSRPRYS", Name = "Wire Transfer", Description = "Wire Transfer"
+            },
+            new PaymentMode { Id = "01H7PCVS01J4ZANSQHEKV658H1", Name = "Credit Card", Description = "Credit Card" });
     }
 }

@@ -36,5 +36,10 @@ public class ContactTypeSpecifications : IEntityTypeConfiguration<ContactType>
             .HasColumnName("description")
             .HasColumnType("varchar(200)")
             .HasMaxLength(200);
+
+        builder.HasData(
+            new ContactType { Id = "01H7PBQ3MBB6ZX1Y39TV6KPM5T", Name = "Phone", Description = "Phone Number" },
+            new ContactType { Id = "01H7PBQ3MQ33DF64P8FDZJ6CCG", Name = "Email", Description = "Email Address" },
+            new ContactType { Id = "01H7PBQ3MQRT5Q538QR2VCQZZT", Name = "Fax", Description = "Fax Number" });
     }
 }

@@ -49,7 +49,7 @@ public class CountrySpecifications : IEntityTypeConfiguration<Country>
         builder.Property(country => country.PhoneCode)
             .HasColumnName("phone_code")
             .HasColumnType("smallint");
-        
+
         builder.Property(country => country.CurrencyCode)
             .HasColumnName("currency_code")
             .HasColumnType("char(3)")
@@ -60,5 +60,46 @@ public class CountrySpecifications : IEntityTypeConfiguration<Country>
             .HasForeignKey(state => state.CountryId)
             .HasPrincipalKey(country => country.Id)
             .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasData(
+            new Country
+            {
+                Id = "01H7PBQ3MQX3EBSHD7QPVZJ0H9",
+                Name = "United States of America",
+                CurrencyCode = "USD",
+                Iso3Code = "USA",
+                IsoCode = "US",
+                NumericCode = 840,
+                PhoneCode = 1
+            },
+            new Country
+            {
+                Id = "01H7PBQ3MR64WY2NKZH42K6YNX",
+                Name = "United Kingdom",
+                CurrencyCode = "GBP",
+                Iso3Code = "GBR",
+                IsoCode = "GB",
+                NumericCode = 826,
+                PhoneCode = 44
+            },
+            new Country
+            {
+                Id = "01H7PBQ3MRE96CH0CHH0T5VESH",
+                Name = "France",
+                CurrencyCode = "EUR",
+                Iso3Code = "FRA",
+                IsoCode = "FR",
+                NumericCode = 250,
+                PhoneCode = 33
+            }, new Country
+            {
+                Id = "01H7PBQ3MRF96R5ES7EYPWDTYX",
+                Name = "Mexico",
+                CurrencyCode = "MXN",
+                Iso3Code = "MEX",
+                IsoCode = "MX",
+                NumericCode = 484,
+                PhoneCode = 52
+            });
     }
 }

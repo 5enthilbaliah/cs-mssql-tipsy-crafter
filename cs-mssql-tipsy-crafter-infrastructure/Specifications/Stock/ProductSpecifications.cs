@@ -5,14 +5,14 @@ using Domain.Stock;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-public class ProductTypeSpecifications : IEntityTypeConfiguration<ProductType>
+public class ProductSpecifications : IEntityTypeConfiguration<Product>
 {
-    public void Configure(EntityTypeBuilder<ProductType> builder)
+    public void Configure(EntityTypeBuilder<Product> builder)
     {
-        builder.ToTable("product_type", "stock", tableBuilder =>
+        builder.ToTable("product", "stock", tableBuilder =>
             {
                 tableBuilder.IsTemporal()
-                    .UseHistoryTable("product_type_history", "stock");
+                    .UseHistoryTable("product_history", "stock");
                 tableBuilder.IsTemporal()
                     .HasPeriodStart("valid_from");
                 tableBuilder.IsTemporal()
@@ -20,32 +20,36 @@ public class ProductTypeSpecifications : IEntityTypeConfiguration<ProductType>
             }
         );
         
-        builder.HasKey(productType => productType.Id);
-        builder.Property(productType => productType.Id)
+        builder.HasKey(product => product.Id);
+        builder.Property(product => product.Id)
             .ValueGeneratedNever()
             .HasColumnName("id")
             .HasColumnType("varchar(26)")
             .HasMaxLength(26);
         
-        builder.Property(productType => productType.Name)
+        builder.Property(product => product.Name)
             .HasColumnName("name")
             .HasColumnType("varchar(80)")
             .HasMaxLength(80);
         
-        builder.Property(productType => productType.Description)
+        builder.Property(product => product.Description)
             .HasColumnName("description")
             .HasColumnType("varchar(2000)")
             .HasMaxLength(2000);
         
-        builder.Property(productType => productType.CategoryId)
-            .HasColumnName("category_id")
+        builder.Property(product => product.Upc)
+            .HasColumnName("upc")
+            .HasColumnType("varchar(12)")
+            .HasMaxLength(12);
+        
+        builder.Property(product => product.Sku)
+            .HasColumnName("sku")
+            .HasColumnType("varchar(12)")
+            .HasMaxLength(12);
+        
+        builder.Property(product => product.ProductTypeId)
+            .HasColumnName("product_type_id")
             .HasColumnType("varchar(26)")
             .HasMaxLength(26);
-        
-        builder.HasMany(productType => productType.Products)
-            .WithOne(product => product.ProductType)
-            .HasForeignKey(productType => productType.ProductTypeId)
-            .HasPrincipalKey(product => product.Id)
-            .OnDelete(DeleteBehavior.Restrict);
     }
 }

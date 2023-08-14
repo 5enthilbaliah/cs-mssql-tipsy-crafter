@@ -28,6 +28,8 @@ public class AmritaTipsyDbContext : DbContext
     
     // Stock
     public DbSet<Category> Categories { get; set; } = null!;
+    public DbSet<ProductType> ProductTypes { get; set; } = null!;
+    public DbSet<Product> Products { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

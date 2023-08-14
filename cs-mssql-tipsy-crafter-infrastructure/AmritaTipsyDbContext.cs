@@ -1,5 +1,7 @@
 ﻿namespace AmritaDb.Tipsy.Infrastructure;
 
+using Domain.Purchase;
+// using Domain.Retail;
 using Domain.Universal;
 
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +17,10 @@ public class AmritaTipsyDbContext : DbContext
     public DbSet<Country> Countries { get; set; } = null!;
     public DbSet<State> States { get; set; } = null!;
     public DbSet<PaymentMode> PaymentModes { get; set; } = null!;
+    
+    public DbSet<OrderStatus> OrderStatuses { get; set; } = null!;
+    
+    // public DbSet<SaleStatus> SaleStatuses { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -51,5 +51,11 @@ public class ProductSpecifications : IEntityTypeConfiguration<Product>
             .HasColumnName("product_type_id")
             .HasColumnType("varchar(26)")
             .HasMaxLength(26);
+        
+        builder.HasMany(product => product.ProductImages)
+            .WithOne(productImage => productImage.Product)
+            .HasForeignKey(productImage => productImage.ProductId)
+            .HasPrincipalKey(product => product.Id)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

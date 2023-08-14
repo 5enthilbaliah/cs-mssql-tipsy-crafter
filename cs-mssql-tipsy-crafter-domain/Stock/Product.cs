@@ -10,4 +10,6 @@ public class Product
     public string ProductTypeId { get; set; } = null!;
     
     public ProductType ProductType { get; set; } = null!;
+
+    public ICollection<ProductImage> ProductImages => null!;
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AmritaDb.Tipsy.Infrastructure.Migrations
 {
     [DbContext(typeof(AmritaTipsyDbContext))]
-    [Migration("20230813230817_Country")]
-    partial class Country
+    [Migration("20230814015635_Universal-Entities")]
+    partial class UniversalEntities
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,6 +77,12 @@ namespace AmritaDb.Tipsy.Infrastructure.Migrations
                         .HasColumnType("varchar(26)")
                         .HasColumnName("id");
 
+                    b.Property<string>("CurrencyCode")
+                        .IsRequired()
+                        .HasMaxLength(3)
+                        .HasColumnType("char(3)")
+                        .HasColumnName("currency_code");
+
                     b.Property<string>("Iso3Code")
                         .HasMaxLength(3)
                         .HasColumnType("char(3)")
@@ -126,6 +132,120 @@ namespace AmritaDb.Tipsy.Infrastructure.Migrations
                                     .HasPeriodEnd("valid_to")
                                     .HasColumnName("valid_to");
                             }));
+                });
+
+            modelBuilder.Entity("AmritaDb.Tipsy.Domain.Universal.PaymentMode", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(26)
+                        .HasColumnType("varchar(26)")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)")
+                        .HasColumnName("description");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("name");
+
+                    b.Property<DateTime>("valid_from")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("valid_from");
+
+                    b.Property<DateTime>("valid_to")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("valid_to");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("payment_mode", "universal");
+
+                    b.ToTable(tb => tb.IsTemporal(ttb =>
+                            {
+                                ttb.UseHistoryTable("payment_mode_history", "universal");
+                                ttb
+                                    .HasPeriodStart("valid_from")
+                                    .HasColumnName("valid_from");
+                                ttb
+                                    .HasPeriodEnd("valid_to")
+                                    .HasColumnName("valid_to");
+                            }));
+                });
+
+            modelBuilder.Entity("AmritaDb.Tipsy.Domain.Universal.State", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(26)
+                        .HasColumnType("varchar(26)")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("char(5)")
+                        .HasColumnName("code");
+
+                    b.Property<string>("CountryId")
+                        .IsRequired()
+                        .HasMaxLength(26)
+                        .HasColumnType("varchar(26)")
+                        .HasColumnName("country_id");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("varchar(80)")
+                        .HasColumnName("name");
+
+                    b.Property<DateTime>("valid_from")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("valid_from");
+
+                    b.Property<DateTime>("valid_to")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("valid_to");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
+
+                    b.ToTable("state", "universal");
+
+                    b.ToTable(tb => tb.IsTemporal(ttb =>
+                            {
+                                ttb.UseHistoryTable("state_history", "universal");
+                                ttb
+                                    .HasPeriodStart("valid_from")
+                                    .HasColumnName("valid_from");
+                                ttb
+                                    .HasPeriodEnd("valid_to")
+                                    .HasColumnName("valid_to");
+                            }));
+                });
+
+            modelBuilder.Entity("AmritaDb.Tipsy.Domain.Universal.State", b =>
+                {
+                    b.HasOne("AmritaDb.Tipsy.Domain.Universal.Country", "Country")
+                        .WithMany("States")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("AmritaDb.Tipsy.Domain.Universal.Country", b =>
+                {
+                    b.Navigation("States");
                 });
 #pragma warning restore 612, 618
         }

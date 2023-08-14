@@ -49,10 +49,16 @@ public class CountrySpecifications : IEntityTypeConfiguration<Country>
         builder.Property(country => country.PhoneCode)
             .HasColumnName("phone_code")
             .HasColumnType("smallint");
+        
+        builder.Property(country => country.CurrencyCode)
+            .HasColumnName("currency_code")
+            .HasColumnType("char(3)")
+            .HasMaxLength(3);
 
         builder.HasMany(country => country.States)
             .WithOne(state => state.Country)
             .HasForeignKey(state => state.CountryId)
-            .HasPrincipalKey(country => country.Id);
+            .HasPrincipalKey(country => country.Id)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

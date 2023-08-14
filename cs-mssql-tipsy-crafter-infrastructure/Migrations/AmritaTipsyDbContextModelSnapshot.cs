@@ -74,6 +74,12 @@ namespace AmritaDb.Tipsy.Infrastructure.Migrations
                         .HasColumnType("varchar(26)")
                         .HasColumnName("id");
 
+                    b.Property<string>("CurrencyCode")
+                        .IsRequired()
+                        .HasMaxLength(3)
+                        .HasColumnType("char(3)")
+                        .HasColumnName("currency_code");
+
                     b.Property<string>("Iso3Code")
                         .HasMaxLength(3)
                         .HasColumnType("char(3)")
@@ -116,6 +122,51 @@ namespace AmritaDb.Tipsy.Infrastructure.Migrations
                     b.ToTable(tb => tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("country_history", "universal");
+                                ttb
+                                    .HasPeriodStart("valid_from")
+                                    .HasColumnName("valid_from");
+                                ttb
+                                    .HasPeriodEnd("valid_to")
+                                    .HasColumnName("valid_to");
+                            }));
+                });
+
+            modelBuilder.Entity("AmritaDb.Tipsy.Domain.Universal.PaymentMode", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(26)
+                        .HasColumnType("varchar(26)")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)")
+                        .HasColumnName("description");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("name");
+
+                    b.Property<DateTime>("valid_from")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("valid_from");
+
+                    b.Property<DateTime>("valid_to")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("valid_to");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("payment_mode", "universal");
+
+                    b.ToTable(tb => tb.IsTemporal(ttb =>
+                            {
+                                ttb.UseHistoryTable("payment_mode_history", "universal");
                                 ttb
                                     .HasPeriodStart("valid_from")
                                     .HasColumnName("valid_from");
@@ -183,7 +234,7 @@ namespace AmritaDb.Tipsy.Infrastructure.Migrations
                     b.HasOne("AmritaDb.Tipsy.Domain.Universal.Country", "Country")
                         .WithMany("States")
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Country");

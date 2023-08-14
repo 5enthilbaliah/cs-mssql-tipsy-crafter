@@ -4,6 +4,7 @@ using AmritaDb.Tipsy.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AmritaDb.Tipsy.Infrastructure.Migrations
 {
     [DbContext(typeof(AmritaTipsyDbContext))]
-    partial class AmritaTipsyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230814061628_Store")]
+    partial class Store
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -315,7 +318,7 @@ namespace AmritaDb.Tipsy.Infrastructure.Migrations
                         .HasColumnName("latitude");
 
                     b.Property<decimal?>("Longitude")
-                        .HasColumnType("decimal(9,6)")
+                        .HasColumnType("decimal(8,6)")
                         .HasColumnName("longitude");
 
                     b.Property<string>("Name")
@@ -358,73 +361,6 @@ namespace AmritaDb.Tipsy.Infrastructure.Migrations
                     b.ToTable(tb => tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("store_history", "retail");
-                                ttb
-                                    .HasPeriodStart("valid_from")
-                                    .HasColumnName("valid_from");
-                                ttb
-                                    .HasPeriodEnd("valid_to")
-                                    .HasColumnName("valid_to");
-                            }));
-                });
-
-            modelBuilder.Entity("AmritaDb.Tipsy.Domain.Retail.StoreContact", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasMaxLength(26)
-                        .HasColumnType("varchar(26)")
-                        .HasColumnName("id");
-
-                    b.Property<string>("ContactTypeId")
-                        .IsRequired()
-                        .HasMaxLength(26)
-                        .HasColumnType("varchar(26)")
-                        .HasColumnName("contact_type_id");
-
-                    b.Property<string>("Detail")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)")
-                        .HasColumnName("detail");
-
-                    b.Property<bool>("IsPrimary")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasColumnName("is_primary");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("varchar(40)")
-                        .HasColumnName("name");
-
-                    b.Property<string>("StoreId")
-                        .IsRequired()
-                        .HasMaxLength(26)
-                        .HasColumnType("varchar(26)")
-                        .HasColumnName("store_id");
-
-                    b.Property<DateTime>("valid_from")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2")
-                        .HasColumnName("valid_from");
-
-                    b.Property<DateTime>("valid_to")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2")
-                        .HasColumnName("valid_to");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ContactTypeId");
-
-                    b.HasIndex("StoreId");
-
-                    b.ToTable("store_contact", "retail");
-
-                    b.ToTable(tb => tb.IsTemporal(ttb =>
-                            {
-                                ttb.UseHistoryTable("store_contact_history", "retail");
                                 ttb
                                     .HasPeriodStart("valid_from")
                                     .HasColumnName("valid_from");
@@ -958,25 +894,6 @@ namespace AmritaDb.Tipsy.Infrastructure.Migrations
                             }));
                 });
 
-            modelBuilder.Entity("AmritaDb.Tipsy.Domain.Retail.StoreContact", b =>
-                {
-                    b.HasOne("AmritaDb.Tipsy.Domain.Universal.ContactType", "ContactType")
-                        .WithMany("Contacts")
-                        .HasForeignKey("ContactTypeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("AmritaDb.Tipsy.Domain.Retail.Store", "Store")
-                        .WithMany("Contacts")
-                        .HasForeignKey("StoreId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("ContactType");
-
-                    b.Navigation("Store");
-                });
-
             modelBuilder.Entity("AmritaDb.Tipsy.Domain.Stock.Category", b =>
                 {
                     b.HasOne("AmritaDb.Tipsy.Domain.Stock.Category", "ParentCategory")
@@ -1031,11 +948,6 @@ namespace AmritaDb.Tipsy.Infrastructure.Migrations
                     b.Navigation("Country");
                 });
 
-            modelBuilder.Entity("AmritaDb.Tipsy.Domain.Retail.Store", b =>
-                {
-                    b.Navigation("Contacts");
-                });
-
             modelBuilder.Entity("AmritaDb.Tipsy.Domain.Stock.Category", b =>
                 {
                     b.Navigation("Children");
@@ -1051,11 +963,6 @@ namespace AmritaDb.Tipsy.Infrastructure.Migrations
             modelBuilder.Entity("AmritaDb.Tipsy.Domain.Stock.ProductType", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("AmritaDb.Tipsy.Domain.Universal.ContactType", b =>
-                {
-                    b.Navigation("Contacts");
                 });
 
             modelBuilder.Entity("AmritaDb.Tipsy.Domain.Universal.Country", b =>

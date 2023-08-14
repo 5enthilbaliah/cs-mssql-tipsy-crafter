@@ -26,7 +26,9 @@ public class AmritaTipsyDbContext : DbContext
 
     // Retail
     public DbSet<SaleStatus> SaleStatuses { get; set; } = null!;
-    
+    public DbSet<Store> Stores { get; set; } = null!;
+    public DbSet<StoreContact> StoreContacts { get; set; } = null!;
+
     // Stock
     public DbSet<Category> Categories { get; set; } = null!;
     public DbSet<ProductType> ProductTypes { get; set; } = null!;

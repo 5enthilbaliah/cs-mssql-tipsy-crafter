@@ -36,6 +36,12 @@ public class ContactTypeSpecifications : IEntityTypeConfiguration<ContactType>
             .HasColumnName("description")
             .HasColumnType("varchar(200)")
             .HasMaxLength(200);
+        
+        builder.HasMany(contactType => contactType.Contacts)
+            .WithOne(contact => contact.ContactType)
+            .HasForeignKey(contact => contact.ContactTypeId)
+            .HasPrincipalKey(contactType => contactType.Id)
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasData(
             new ContactType { Id = "01H7PBQ3MBB6ZX1Y39TV6KPM5T", Name = "Phone", Description = "Phone Number" },

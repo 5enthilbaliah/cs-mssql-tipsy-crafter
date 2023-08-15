@@ -14,7 +14,7 @@ public class Supplier
     public string ZipCode { get; set; } = null!;
     public decimal? Latitude { get; set; }
     public decimal? Longitude { get; set; }
-    public string PreferredCurrencyCode { get; set; } = null!;
+    public string PreferredCurrency { get; set; } = null!;
     
     public ICollection<SupplierContact> Contacts => null!;
 }

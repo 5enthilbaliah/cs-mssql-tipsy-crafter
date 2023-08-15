@@ -11,6 +11,6 @@ public class ContactType
     public string Description { get; set; } = null!;
     
     public ICollection<StoreContact> StoreContacts => null!;
-    
     public ICollection<SupplierContact> SupplierContacts => null!;
+    public ICollection<CustomerContact> CustomerContacts => null!;
 }

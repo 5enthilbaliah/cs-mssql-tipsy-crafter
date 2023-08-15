@@ -85,8 +85,8 @@ public class StoreSpecifications : IEntityTypeConfiguration<Store>
             .HasColumnName("longitude")
             .HasColumnType("decimal(9,6)");
         
-        builder.Property(store => store.PreferredCurrencyCode)
-            .HasColumnName("preferred_currency_code")
+        builder.Property(store => store.PreferredCurrency)
+            .HasColumnName("preferred_currency")
             .HasColumnType("char(3)")
             .HasMaxLength(3)
             .HasDefaultValue("USD");

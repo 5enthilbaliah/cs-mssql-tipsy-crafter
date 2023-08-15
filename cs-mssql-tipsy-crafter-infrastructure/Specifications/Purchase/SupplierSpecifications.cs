@@ -80,8 +80,8 @@ public class SupplierSpecifications : IEntityTypeConfiguration<Supplier>
             .HasColumnName("longitude")
             .HasColumnType("decimal(9,6)");
         
-        builder.Property(supplier => supplier.PreferredCurrencyCode)
-            .HasColumnName("preferred_currency_code")
+        builder.Property(supplier => supplier.PreferredCurrency)
+            .HasColumnName("preferred_currency")
             .HasColumnType("char(3)")
             .HasMaxLength(3)
             .HasDefaultValue("USD");

@@ -30,6 +30,8 @@ public class AmritaTipsyDbContext : DbContext
     public DbSet<SaleStatus> SaleStatuses { get; set; } = null!;
     public DbSet<Store> Stores { get; set; } = null!;
     public DbSet<StoreContact> StoreContacts { get; set; } = null!;
+    public DbSet<Customer> Customers { get; set; } = null!;
+    public DbSet<CustomerContact> CustomerContacts { get; set; } = null!;
 
     // Stock
     public DbSet<Category> Categories { get; set; } = null!;

@@ -4,6 +4,7 @@ using AmritaDb.Tipsy.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AmritaDb.Tipsy.Infrastructure.Migrations
 {
     [DbContext(typeof(AmritaTipsyDbContext))]
-    partial class AmritaTipsyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230815050525_Customer")]
+    partial class Customer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -235,13 +238,13 @@ namespace AmritaDb.Tipsy.Infrastructure.Migrations
                         .HasColumnType("varchar(40)")
                         .HasColumnName("name");
 
-                    b.Property<string>("PreferredCurrency")
+                    b.Property<string>("PreferredCurrencyCode")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(3)
                         .HasColumnType("char(3)")
                         .HasDefaultValue("USD")
-                        .HasColumnName("preferred_currency");
+                        .HasColumnName("preferred_currency_code");
 
                     b.Property<string>("State")
                         .IsRequired()
@@ -639,13 +642,13 @@ namespace AmritaDb.Tipsy.Infrastructure.Migrations
                         .HasColumnType("varchar(40)")
                         .HasColumnName("name");
 
-                    b.Property<string>("PreferredCurrency")
+                    b.Property<string>("PreferredCurrencyCode")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(3)
                         .HasColumnType("char(3)")
                         .HasDefaultValue("USD")
-                        .HasColumnName("preferred_currency");
+                        .HasColumnName("preferred_currency_code");
 
                     b.Property<string>("State")
                         .IsRequired()

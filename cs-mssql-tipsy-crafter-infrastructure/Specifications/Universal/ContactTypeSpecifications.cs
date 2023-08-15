@@ -37,7 +37,13 @@ public class ContactTypeSpecifications : IEntityTypeConfiguration<ContactType>
             .HasColumnType("varchar(200)")
             .HasMaxLength(200);
         
-        builder.HasMany(contactType => contactType.Contacts)
+        builder.HasMany(contactType => contactType.StoreContacts)
+            .WithOne(contact => contact.ContactType)
+            .HasForeignKey(contact => contact.ContactTypeId)
+            .HasPrincipalKey(contactType => contactType.Id)
+            .OnDelete(DeleteBehavior.Restrict);
+        
+        builder.HasMany(contactType => contactType.SupplierContacts)
             .WithOne(contact => contact.ContactType)
             .HasForeignKey(contact => contact.ContactTypeId)
             .HasPrincipalKey(contactType => contactType.Id)

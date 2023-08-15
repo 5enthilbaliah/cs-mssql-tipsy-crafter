@@ -1,18 +1,18 @@
-﻿namespace AmritaDb.Tipsy.Infrastructure.Specifications.Retail;
+﻿namespace AmritaDb.Tipsy.Infrastructure.Specifications.Purchase;
 
-using Domain.Retail;
+using Domain.Purchase;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-public class StoreSpecifications : IEntityTypeConfiguration<Store>
+public class SupplierSpecifications : IEntityTypeConfiguration<Supplier>
 {
-    public void Configure(EntityTypeBuilder<Store> builder)
+    public void Configure(EntityTypeBuilder<Supplier> builder)
     {
-        builder.ToTable("store", "retail", tableBuilder =>
+        builder.ToTable("supplier", "purchase", tableBuilder =>
             {
                 tableBuilder.IsTemporal()
-                    .UseHistoryTable("store_history", "retail");
+                    .UseHistoryTable("supplier_history", "purchase");
                 tableBuilder.IsTemporal()
                     .HasPeriodStart("valid_from");
                 tableBuilder.IsTemporal()
@@ -20,81 +20,76 @@ public class StoreSpecifications : IEntityTypeConfiguration<Store>
             }
         );
         
-        builder.HasKey(store => store.Id);
-        builder.Property(store => store.Id)
+        builder.HasKey(supplier => supplier.Id);
+        builder.Property(supplier => supplier.Id)
             .ValueGeneratedNever()
             .HasColumnName("id")
             .HasColumnType("varchar(26)")
             .HasMaxLength(26);
         
-        builder.Property(store => store.Name)
+        builder.Property(supplier => supplier.Name)
             .HasColumnName("name")
             .HasColumnType("varchar(40)")
             .HasMaxLength(40);
         
-        builder.Property(store => store.Description)
+        builder.Property(supplier => supplier.Description)
             .HasColumnName("description")
             .HasColumnType("varchar(2000)")
             .HasMaxLength(2000);
         
-        builder.Property(store => store.WebsiteUrl)
+        builder.Property(supplier => supplier.WebsiteUrl)
             .HasColumnName("website_url")
             .HasColumnType("varchar(512)")
             .HasMaxLength(512);
         
-        builder.Property(store => store.Address1)
+        builder.Property(supplier => supplier.Address1)
             .HasColumnName("address_1")
             .HasColumnType("varchar(120)")
             .HasMaxLength(120);
         
-        builder.Property(store => store.Address2)
+        builder.Property(supplier => supplier.Address2)
             .HasColumnName("address_2")
             .HasColumnType("varchar(120)")
             .HasMaxLength(120);
         
-        builder.Property(store => store.City)
+        builder.Property(supplier => supplier.City)
             .HasColumnName("city")
             .HasColumnType("varchar(100)")
             .HasMaxLength(100);
         
-        builder.Property(store => store.State)
+        builder.Property(supplier => supplier.State)
             .HasColumnName("state")
             .HasColumnType("char(3)")
             .HasMaxLength(3);
         
-        builder.Property(store => store.Country)
+        builder.Property(supplier => supplier.Country)
             .HasColumnName("country")
             .HasColumnType("char(2)")
             .HasMaxLength(2);
         
-        builder.Property(store => store.ZipCode)
+        builder.Property(supplier => supplier.ZipCode)
             .HasColumnName("zip_code")
             .HasColumnType("varchar(16)")
             .HasMaxLength(16);
-        
-        builder.Property(store => store.IsWarehouse)
-            .HasColumnName("is_warehouse")
-            .HasColumnType("bit")
-            .HasDefaultValue(0);
-        
-        builder.Property(store => store.Latitude)
+
+        builder.Property(supplier => supplier.Latitude)
             .HasColumnName("latitude")
             .HasColumnType("decimal(8,6)");
         
-        builder.Property(store => store.Longitude)
+        builder.Property(supplier => supplier.Longitude)
             .HasColumnName("longitude")
             .HasColumnType("decimal(9,6)");
         
-        builder.Property(store => store.PreferredCurrencyCode)
+        builder.Property(supplier => supplier.PreferredCurrencyCode)
             .HasColumnName("preferred_currency_code")
             .HasColumnType("char(3)")
             .HasMaxLength(3)
             .HasDefaultValue("USD");
         
-        builder.HasMany(store => store.Contacts)
-            .WithOne(contact => contact.Store)
-            .HasForeignKey(contact => contact.StoreId)
-            .HasPrincipalKey(store => store.Id)
+        builder.HasMany(supplier => supplier.Contacts)
+            .WithOne(contact => contact.Supplier)
+            .HasForeignKey(contact => contact.SupplierId)
+            .HasPrincipalKey(supplier => supplier.Id)
             .OnDelete(DeleteBehavior.Restrict);
     }
 }

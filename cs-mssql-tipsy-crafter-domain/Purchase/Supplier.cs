@@ -1,6 +1,6 @@
-﻿namespace AmritaDb.Tipsy.Domain.Retail;
+﻿namespace AmritaDb.Tipsy.Domain.Purchase;
 
-public class Store
+public class Supplier
 {
     public string Id { get; set; } = null!;
     public string Name { get; set; } = null!;
@@ -12,10 +12,9 @@ public class Store
     public string State { get; set; } = null!;
     public string Country { get; set; } = null!;
     public string ZipCode { get; set; } = null!;
-    public bool IsWarehouse { get; set; }
     public decimal? Latitude { get; set; }
     public decimal? Longitude { get; set; }
     public string PreferredCurrencyCode { get; set; } = null!;
-
-    public ICollection<StoreContact> Contacts => null!;
+    
+    public ICollection<SupplierContact> Contacts => null!;
 }

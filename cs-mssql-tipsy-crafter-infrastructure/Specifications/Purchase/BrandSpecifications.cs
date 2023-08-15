@@ -34,8 +34,8 @@ public class BrandSpecifications : IEntityTypeConfiguration<Brand>
         
         builder.Property(brand => brand.Description)
             .HasColumnName("description")
-            .HasColumnType("varchar(200)")
-            .HasMaxLength(200);
+            .HasColumnType("varchar(2000)")
+            .HasMaxLength(2000);
         
         builder.Property(brand => brand.WebsiteUrl)
             .HasColumnName("website_url")

@@ -19,6 +19,7 @@ public class AmritaTipsyDbContext : DbContext
     public DbSet<Country> Countries { get; set; } = null!;
     public DbSet<State> States { get; set; } = null!;
     public DbSet<PaymentMode> PaymentModes { get; set; } = null!;
+    public DbSet<Shipper> Shippers { get; set; } = null!;
     
     // Purchase
     public DbSet<OrderStatus> OrderStatuses { get; set; } = null!;

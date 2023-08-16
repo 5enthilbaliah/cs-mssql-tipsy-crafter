@@ -26,6 +26,7 @@ public class AmritaTipsyDbContext : DbContext
     public DbSet<Brand> Brands { get; set; } = null!;
     public DbSet<Supplier> Suppliers { get; set; } = null!;
     public DbSet<SupplierContact> SupplierContacts { get; set; } = null!;
+    public DbSet<Order> Orders { get; set; } = null!;
 
     // Retail
     public DbSet<SaleStatus> SaleStatuses { get; set; } = null!;
@@ -45,5 +46,7 @@ public class AmritaTipsyDbContext : DbContext
         modelBuilder
             .ApplyConfigurationsFromAssembly(typeof(AmritaTipsyDbContext).Assembly);
         base.OnModelCreating(modelBuilder);
+        
+        // Add last modified by to all entities - default to system no fk relation ship needed
     }
 }

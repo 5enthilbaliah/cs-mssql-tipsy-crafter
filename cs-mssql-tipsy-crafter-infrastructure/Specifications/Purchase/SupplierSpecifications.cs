@@ -91,5 +91,11 @@ public class SupplierSpecifications : IEntityTypeConfiguration<Supplier>
             .HasForeignKey(contact => contact.SupplierId)
             .HasPrincipalKey(supplier => supplier.Id)
             .OnDelete(DeleteBehavior.Restrict);
+        
+        builder.HasMany(supplier => supplier.Orders)
+            .WithOne(order => order.Supplier)
+            .HasForeignKey(order => order.SupplierId)
+            .HasPrincipalKey(supplier => supplier.Id)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

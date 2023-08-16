@@ -36,6 +36,12 @@ public class OrderStatusSpecifications : IEntityTypeConfiguration<OrderStatus>
             .HasColumnName("description")
             .HasColumnType("varchar(200)")
             .HasMaxLength(200);
+        
+        builder.HasMany(orderStatus => orderStatus.Orders)
+            .WithOne(order => order.Status)
+            .HasForeignKey(order => order.StatusId)
+            .HasPrincipalKey(orderStatus => orderStatus.Id)
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasData(new OrderStatus { Id = "01H7PKMMPRCGB7D65EYPKVAYMH", Name = "New", Description = "New" },
             new OrderStatus

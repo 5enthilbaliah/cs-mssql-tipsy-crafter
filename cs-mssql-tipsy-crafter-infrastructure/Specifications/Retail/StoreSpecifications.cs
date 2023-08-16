@@ -96,5 +96,11 @@ public class StoreSpecifications : IEntityTypeConfiguration<Store>
             .HasForeignKey(contact => contact.StoreId)
             .HasPrincipalKey(store => store.Id)
             .OnDelete(DeleteBehavior.Restrict);
+        
+        builder.HasMany(store => store.Orders)
+            .WithOne(order => order.Store)
+            .HasForeignKey(order => order.StoreId)
+            .HasPrincipalKey(store => store.Id)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

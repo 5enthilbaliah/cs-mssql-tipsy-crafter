@@ -17,4 +17,5 @@ public class Supplier
     public string PreferredCurrency { get; set; } = null!;
     
     public ICollection<SupplierContact> Contacts => null!;
+    public ICollection<Order> Orders => null!;
 }

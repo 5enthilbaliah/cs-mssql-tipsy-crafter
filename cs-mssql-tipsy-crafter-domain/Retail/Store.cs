@@ -1,5 +1,7 @@
 ﻿namespace AmritaDb.Tipsy.Domain.Retail;
 
+using Purchase;
+
 public class Store
 {
     public string Id { get; set; } = null!;
@@ -18,4 +20,5 @@ public class Store
     public string PreferredCurrency { get; set; } = null!;
 
     public ICollection<StoreContact> Contacts => null!;
+    public ICollection<Order> Orders => null!;
 }

@@ -15,4 +15,5 @@ public class Product
 
     public ICollection<ProductImage> ProductImages => null!;
     public ICollection<OrderItem> OrderItems => null!;
+    public ICollection<Inventory> Inventories => null!;
 }

@@ -63,5 +63,11 @@ public class ProductSpecifications : IEntityTypeConfiguration<Product>
             .HasForeignKey(orderItem => orderItem.ProductId)
             .HasPrincipalKey(product => product.Id)
             .OnDelete(DeleteBehavior.Restrict);
+        
+        builder.HasMany(product => product.Inventories)
+            .WithOne(inventory => inventory.Product)
+            .HasForeignKey(inventory => inventory.ProductId)
+            .HasPrincipalKey(product => product.Id)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

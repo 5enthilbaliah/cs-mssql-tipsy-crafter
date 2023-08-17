@@ -102,5 +102,11 @@ public class StoreSpecifications : IEntityTypeConfiguration<Store>
             .HasForeignKey(order => order.StoreId)
             .HasPrincipalKey(store => store.Id)
             .OnDelete(DeleteBehavior.Restrict);
+        
+        builder.HasMany(store => store.Inventories)
+            .WithOne(inventory => inventory.Store)
+            .HasForeignKey(inventory => inventory.StoreId)
+            .HasPrincipalKey(store => store.Id)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

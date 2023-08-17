@@ -42,6 +42,7 @@ public class AmritaTipsyDbContext : DbContext
     public DbSet<ProductType> ProductTypes { get; set; } = null!;
     public DbSet<Product> Products { get; set; } = null!;
     public DbSet<ProductImage> ProductImages { get; set; } = null!;
+    public DbSet<Inventory> Inventories { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

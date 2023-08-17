@@ -2,6 +2,8 @@
 
 using Purchase;
 
+using Stock;
+
 public class Store
 {
     public string Id { get; set; } = null!;
@@ -21,4 +23,5 @@ public class Store
 
     public ICollection<StoreContact> Contacts => null!;
     public ICollection<Order> Orders => null!;
+    public ICollection<Inventory> Inventories => null!;
 }

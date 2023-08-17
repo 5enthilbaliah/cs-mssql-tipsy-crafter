@@ -38,8 +38,14 @@ public class PaymentModeSpecifications : IEntityTypeConfiguration<PaymentMode>
             .HasMaxLength(200);
         
         builder.HasMany(paymentMode => paymentMode.Settlements)
-            .WithOne(settlement => settlement.Mode)
+            .WithOne(settlement => settlement.PaymentMode)
             .HasForeignKey(settlement => settlement.PaymentModeId)
+            .HasPrincipalKey(paymentMode => paymentMode.Id)
+            .OnDelete(DeleteBehavior.Restrict);
+        
+        builder.HasMany(paymentMode => paymentMode.Payments)
+            .WithOne(payment => payment.PaymentMode)
+            .HasForeignKey(payment => payment.PaymentModeId)
             .HasPrincipalKey(paymentMode => paymentMode.Id)
             .OnDelete(DeleteBehavior.Restrict);
 

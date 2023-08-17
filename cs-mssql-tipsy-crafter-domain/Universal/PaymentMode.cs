@@ -2,6 +2,8 @@
 
 using Purchase;
 
+using Retail;
+
 public class PaymentMode
 {
     public string Id { get; set; } = null!;
@@ -9,4 +11,5 @@ public class PaymentMode
     public string Description { get; set; } = null!;
 
     public ICollection<Settlement> Settlements => null!;
+    public ICollection<Payment> Payments => null!;
 }

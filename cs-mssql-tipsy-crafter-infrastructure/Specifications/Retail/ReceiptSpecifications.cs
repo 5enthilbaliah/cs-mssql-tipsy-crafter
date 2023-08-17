@@ -80,18 +80,7 @@ public class ReceiptSpecifications : IEntityTypeConfiguration<Receipt>
             .HasColumnType("money")
             .HasColumnName("grand_total_amount")
             .HasDefaultValue(0);
-        
-        builder.Property(receipt => receipt.CustomerGrandTotalCurrency)
-            .HasColumnType("char(3)")
-            .HasColumnName("customer_grand_total_currency")
-            .HasMaxLength(3)
-            .HasDefaultValue("USD");
-            
-        builder.Property(receipt => receipt.CustomerGrandTotal)
-            .HasColumnType("money")
-            .HasColumnName("customer_grand_total_amount")
-            .HasDefaultValue(0);
-        
+
         builder.Property(receipt => receipt.PromoCode)
             .HasColumnName("promo_code")
             .HasColumnType("varchar(200)")
@@ -102,5 +91,11 @@ public class ReceiptSpecifications : IEntityTypeConfiguration<Receipt>
             .HasColumnType("varchar(200)")
             .HasMaxLength(200)
             .HasDefaultValue("SYSTEM");
+        
+        builder.HasMany(receipt => receipt.Payments)
+            .WithOne(payment => payment.Receipt)
+            .HasForeignKey(payment => payment.ReceiptId)
+            .HasPrincipalKey(receipt => receipt.Id)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

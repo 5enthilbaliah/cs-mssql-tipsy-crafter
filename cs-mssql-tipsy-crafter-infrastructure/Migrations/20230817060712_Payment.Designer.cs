@@ -4,6 +4,7 @@ using AmritaDb.Tipsy.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AmritaDb.Tipsy.Infrastructure.Migrations
 {
     [DbContext(typeof(AmritaTipsyDbContext))]
-    partial class AmritaTipsyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230817060712_Payment")]
+    partial class Payment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -981,11 +984,11 @@ namespace AmritaDb.Tipsy.Infrastructure.Migrations
 
                     b.HasIndex("ReceiptId");
 
-                    b.ToTable("payment", "retail");
+                    b.ToTable("payment", "purchase");
 
                     b.ToTable(tb => tb.IsTemporal(ttb =>
                             {
-                                ttb.UseHistoryTable("payment_history", "retail");
+                                ttb.UseHistoryTable("payment_history", "purchase");
                                 ttb
                                     .HasPeriodStart("valid_from")
                                     .HasColumnName("valid_from");

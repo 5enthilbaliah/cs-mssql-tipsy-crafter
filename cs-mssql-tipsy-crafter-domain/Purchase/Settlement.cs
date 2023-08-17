@@ -12,5 +12,5 @@ public class Settlement
     public decimal Paid { get; set; }
     
     public Order Order { get; set; } = null!; 
-    public PaymentMode Mode  { get; set; } = null!; 
+    public PaymentMode PaymentMode  { get; set; } = null!; 
 }

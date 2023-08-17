@@ -1,5 +1,7 @@
 ﻿namespace AmritaDb.Tipsy.Domain.Retail;
 
+using Universal;
+
 public class Receipt
 {
     public string Id { get; set; } = null!;
@@ -14,12 +16,12 @@ public class Receipt
     public decimal ItemDiscount { get; set; }
     public decimal Discount { get; set; }
     public decimal GrandTotal { get; set; }
-    public string CustomerGrandTotalCurrency { get; set; } = null!;
-    public decimal CustomerGrandTotal { get; set; }
     public string? PromoCode { get; set; }
     public string ModifiedBy { get; set; } = null!;
     
     public Customer Customer { get; set; } = null!;
     public Store Store { get; set; } = null!;
     public SaleStatus Status { get; set; } = null!;
+
+    public ICollection<Payment> Payments => null!;
 }

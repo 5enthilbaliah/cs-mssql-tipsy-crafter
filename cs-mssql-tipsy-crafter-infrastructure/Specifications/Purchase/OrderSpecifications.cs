@@ -159,5 +159,11 @@ public class OrderSpecifications : IEntityTypeConfiguration<Order>
             .HasForeignKey(orderItem => orderItem.OrderId)
             .HasPrincipalKey(order => order.Id)
             .OnDelete(DeleteBehavior.Restrict);
+        
+        builder.HasMany(order => order.Settlements)
+            .WithOne(settlement => settlement.Order)
+            .HasForeignKey(settlement => settlement.OrderId)
+            .HasPrincipalKey(order => order.Id)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

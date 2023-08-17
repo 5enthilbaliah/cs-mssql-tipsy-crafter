@@ -35,4 +35,5 @@ public class Order
 
     public ICollection<Delivery> Deliveries => null!;
     public ICollection<OrderItem> Items => null!;
+    public ICollection<Settlement> Settlements => null!;
 }

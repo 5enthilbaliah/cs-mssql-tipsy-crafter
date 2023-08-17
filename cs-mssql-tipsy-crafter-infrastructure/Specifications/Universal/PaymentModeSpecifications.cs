@@ -36,6 +36,12 @@ public class PaymentModeSpecifications : IEntityTypeConfiguration<PaymentMode>
             .HasColumnName("description")
             .HasColumnType("varchar(200)")
             .HasMaxLength(200);
+        
+        builder.HasMany(paymentMode => paymentMode.Settlements)
+            .WithOne(settlement => settlement.Mode)
+            .HasForeignKey(settlement => settlement.PaymentModeId)
+            .HasPrincipalKey(paymentMode => paymentMode.Id)
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasData(new PaymentMode { Id = "01H7PCVP1HGHM93SX4HSW8EM2B", Name = "Cash", Description = "Cash" },
             new PaymentMode { Id = "01H7PCVQ1ERMXJJND16HKKHTKQ", Name = "Cheque", Description = "Cheque / Check" },

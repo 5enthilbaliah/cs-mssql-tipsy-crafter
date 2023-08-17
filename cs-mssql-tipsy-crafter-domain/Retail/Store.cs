@@ -24,4 +24,5 @@ public class Store
     public ICollection<StoreContact> Contacts => null!;
     public ICollection<Order> Orders => null!;
     public ICollection<Inventory> Inventories => null!;
+    public ICollection<Receipt> Receipts => null!;
 }

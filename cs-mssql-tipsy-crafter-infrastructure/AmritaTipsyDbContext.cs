@@ -29,6 +29,7 @@ public class AmritaTipsyDbContext : DbContext
     public DbSet<Order> Orders { get; set; } = null!;
     public DbSet<Delivery> Deliveries { get; set; } = null!;
     public DbSet<OrderItem> OrderItems { get; set; } = null!;
+    public DbSet<Settlement> Settlements { get; set; } = null!;
 
     // Retail
     public DbSet<SaleStatus> SaleStatuses { get; set; } = null!;
@@ -36,6 +37,7 @@ public class AmritaTipsyDbContext : DbContext
     public DbSet<StoreContact> StoreContacts { get; set; } = null!;
     public DbSet<Customer> Customers { get; set; } = null!;
     public DbSet<CustomerContact> CustomerContacts { get; set; } = null!;
+    public DbSet<Receipt> Receipts { get; set; } = null!;
 
     // Stock
     public DbSet<Category> Categories { get; set; } = null!;

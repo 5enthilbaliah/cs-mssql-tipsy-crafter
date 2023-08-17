@@ -36,6 +36,12 @@ public class SaleStatusSpecifications : IEntityTypeConfiguration<SaleStatus>
             .HasColumnName("description")
             .HasColumnType("varchar(200)")
             .HasMaxLength(200);
+        
+        builder.HasMany(status => status.Receipts)
+            .WithOne(receipt => receipt.Status)
+            .HasForeignKey(receipt => receipt.StatusId)
+            .HasPrincipalKey(status => status.Id)
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasData(new SaleStatus { Id = "01H7PKYDSN6HR02HNNJZQ2SEVF", Name = "In Scan", Description = "In Scan" },
             new SaleStatus { Id = "01H7PKYES5MB6TSXVNWGHY05M8", Name = "Paid", Description = "Paid" },

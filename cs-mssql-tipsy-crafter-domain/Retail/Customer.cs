@@ -13,4 +13,5 @@ public class Customer
     public string ZipCode { get; set; } = null!;
     
     public ICollection<CustomerContact> Contacts => null!;
+    public ICollection<Receipt> Receipts => null!;
 }

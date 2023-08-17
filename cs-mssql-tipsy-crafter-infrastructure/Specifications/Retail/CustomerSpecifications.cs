@@ -72,5 +72,11 @@ public class CustomerSpecifications : IEntityTypeConfiguration<Customer>
             .HasForeignKey(contact => contact.CustomerId)
             .HasPrincipalKey(customer => customer.Id)
             .OnDelete(DeleteBehavior.Restrict);
+        
+        builder.HasMany(customer => customer.Receipts)
+            .WithOne(receipt => receipt.Customer)
+            .HasForeignKey(receipt => receipt.CustomerId)
+            .HasPrincipalKey(customer => customer.Id)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

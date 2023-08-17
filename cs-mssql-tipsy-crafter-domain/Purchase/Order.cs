@@ -32,4 +32,6 @@ public class Order
     public Supplier Supplier { get; set; } = null!;
     public Store Store { get; set; } = null!;
     public OrderStatus Status { get; set; } = null!;
+
+    public ICollection<Delivery> Deliveries => null!;
 }

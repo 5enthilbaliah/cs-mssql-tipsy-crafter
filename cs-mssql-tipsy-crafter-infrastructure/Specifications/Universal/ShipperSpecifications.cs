@@ -36,6 +36,12 @@ public class ShipperSpecifications : IEntityTypeConfiguration<Shipper>
             .HasColumnName("description")
             .HasColumnType("varchar(200)")
             .HasMaxLength(200);
+        
+        builder.HasMany(shipper => shipper.Deliveries)
+            .WithOne(delivery => delivery.Shipper)
+            .HasForeignKey(delivery => delivery.ShipperId)
+            .HasPrincipalKey(shipper => shipper.Id)
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasData(
             new Shipper

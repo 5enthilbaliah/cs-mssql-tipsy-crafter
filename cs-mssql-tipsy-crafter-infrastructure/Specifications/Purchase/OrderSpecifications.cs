@@ -147,5 +147,11 @@ public class OrderSpecifications : IEntityTypeConfiguration<Order>
             .HasColumnType("varchar(200)")
             .HasMaxLength(200)
             .HasDefaultValue("SYSTEM");
+        
+        builder.HasMany(order => order.Deliveries)
+            .WithOne(delivery => delivery.Order)
+            .HasForeignKey(delivery => delivery.OrderId)
+            .HasPrincipalKey(order => order.Id)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

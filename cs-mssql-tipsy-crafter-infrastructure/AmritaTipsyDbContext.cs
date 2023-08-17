@@ -27,6 +27,7 @@ public class AmritaTipsyDbContext : DbContext
     public DbSet<Supplier> Suppliers { get; set; } = null!;
     public DbSet<SupplierContact> SupplierContacts { get; set; } = null!;
     public DbSet<Order> Orders { get; set; } = null!;
+    public DbSet<Delivery> Deliveries { get; set; } = null!;
 
     // Retail
     public DbSet<SaleStatus> SaleStatuses { get; set; } = null!;

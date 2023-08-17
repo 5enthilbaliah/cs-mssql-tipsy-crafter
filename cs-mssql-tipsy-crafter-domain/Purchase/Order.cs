@@ -34,4 +34,5 @@ public class Order
     public OrderStatus Status { get; set; } = null!;
 
     public ICollection<Delivery> Deliveries => null!;
+    public ICollection<OrderItem> Items => null!;
 }

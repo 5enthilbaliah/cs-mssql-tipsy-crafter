@@ -55,5 +55,11 @@ public class DeliverySpecifications : IEntityTypeConfiguration<Delivery>
         builder.Property(delivery => delivery.Date)
             .HasColumnName("date")
             .HasColumnType("datetime2(7)");
+        
+        builder.HasMany(delivery => delivery.OrderItems)
+            .WithOne(orderItem => orderItem.Delivery)
+            .HasForeignKey(orderItem => orderItem.DeliveryId)
+            .HasPrincipalKey(delivery => delivery.Id)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

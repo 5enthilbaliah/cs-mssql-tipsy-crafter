@@ -14,4 +14,6 @@ public class Delivery
     
     public Order Order { get; set; } = null!;
     public Shipper? Shipper { get; set; }
+    
+    public ICollection<OrderItem> OrderItems => null!;
 }

@@ -97,5 +97,11 @@ public class ReceiptSpecifications : IEntityTypeConfiguration<Receipt>
             .HasForeignKey(payment => payment.ReceiptId)
             .HasPrincipalKey(receipt => receipt.Id)
             .OnDelete(DeleteBehavior.Restrict);
+        
+        builder.HasMany(receipt => receipt.Shipments)
+            .WithOne(shipment => shipment.Receipt)
+            .HasForeignKey(shipment => shipment.ReceiptId)
+            .HasPrincipalKey(receipt => receipt.Id)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

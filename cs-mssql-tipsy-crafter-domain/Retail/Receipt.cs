@@ -1,7 +1,5 @@
 ﻿namespace AmritaDb.Tipsy.Domain.Retail;
 
-using Universal;
-
 public class Receipt
 {
     public string Id { get; set; } = null!;
@@ -24,4 +22,5 @@ public class Receipt
     public SaleStatus Status { get; set; } = null!;
 
     public ICollection<Payment> Payments => null!;
+    public ICollection<Shipment> Shipments => null!;
 }

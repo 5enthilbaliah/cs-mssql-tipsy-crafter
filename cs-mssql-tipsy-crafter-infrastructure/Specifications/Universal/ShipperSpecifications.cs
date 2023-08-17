@@ -42,6 +42,12 @@ public class ShipperSpecifications : IEntityTypeConfiguration<Shipper>
             .HasForeignKey(delivery => delivery.ShipperId)
             .HasPrincipalKey(shipper => shipper.Id)
             .OnDelete(DeleteBehavior.Restrict);
+        
+        builder.HasMany(shipper => shipper.Shipments)
+            .WithOne(shipment => shipment.Shipper)
+            .HasForeignKey(shipment => shipment.ShipperId)
+            .HasPrincipalKey(shipper => shipper.Id)
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasData(
             new Shipper

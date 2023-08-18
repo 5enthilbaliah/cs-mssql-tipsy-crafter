@@ -20,4 +20,6 @@ public class Inventory
     
     public Product Product { get; set; } = null!;
     public Store Store { get; set; } = null!;
+
+    public ICollection<ReceiptLine> ReceiptLines => null!;
 }

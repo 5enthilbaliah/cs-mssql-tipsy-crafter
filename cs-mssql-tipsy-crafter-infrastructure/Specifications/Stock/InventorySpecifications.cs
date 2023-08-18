@@ -85,5 +85,11 @@ public class InventorySpecifications : IEntityTypeConfiguration<Inventory>
         builder.Property(inventory => inventory.LatestRestockDate)
             .HasColumnName("latest_restock_date")
             .HasColumnType("datetime2(7)");
+        
+        builder.HasMany(inventory => inventory.ReceiptLines)
+            .WithOne(receiptLine => receiptLine.Inventory)
+            .HasForeignKey(receiptLine => receiptLine.InventoryId)
+            .HasPrincipalKey(inventory => inventory.Id)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

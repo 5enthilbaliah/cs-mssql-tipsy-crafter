@@ -23,4 +23,5 @@ public class Receipt
 
     public ICollection<Payment> Payments => null!;
     public ICollection<Shipment> Shipments => null!;
+    public ICollection<ReceiptLine> Lines => null!;
 }

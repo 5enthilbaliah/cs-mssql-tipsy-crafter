@@ -50,5 +50,11 @@ public class ShipmentSpecifications : IEntityTypeConfiguration<Shipment>
         builder.Property(shipment => shipment.Date)
             .HasColumnName("date")
             .HasColumnType("datetime2(7)");
+        
+        builder.HasMany(shipment => shipment.ReceiptLines)
+            .WithOne(receiptLine => receiptLine.Shipment)
+            .HasForeignKey(receiptLine => receiptLine.ShipmentId)
+            .HasPrincipalKey(shipment => shipment.Id)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

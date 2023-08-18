@@ -13,4 +13,6 @@ public class Shipment
     
     public Receipt Receipt { get; set; } = null!;
     public Shipper? Shipper { get; set; }
+
+    public ICollection<ReceiptLine> ReceiptLines => null!;
 }

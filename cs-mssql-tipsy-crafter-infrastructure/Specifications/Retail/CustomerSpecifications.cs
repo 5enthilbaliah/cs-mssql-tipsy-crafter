@@ -1,5 +1,6 @@
 ﻿namespace AmritaDb.Tipsy.Infrastructure.Specifications.Retail;
 
+using Domain.Ecomm;
 using Domain.Retail;
 
 using Microsoft.EntityFrameworkCore;
@@ -61,7 +62,7 @@ public class CustomerSpecifications : IEntityTypeConfiguration<Customer>
             .HasColumnName("country")
             .HasColumnType("char(2)")
             .HasMaxLength(2);
-        
+
         builder.Property(customer => customer.ZipCode)
             .HasColumnName("zip_code")
             .HasColumnType("varchar(16)")
@@ -77,6 +78,12 @@ public class CustomerSpecifications : IEntityTypeConfiguration<Customer>
             .WithOne(receipt => receipt.Customer)
             .HasForeignKey(receipt => receipt.CustomerId)
             .HasPrincipalKey(customer => customer.Id)
+            .OnDelete(DeleteBehavior.Restrict);
+        
+        builder.HasOne(customer => customer.Cart)
+            .WithOne(cart => cart.Customer)
+            .HasForeignKey<Cart>(cart => cart.CustomerId)
+            .HasPrincipalKey<Customer>(customer => customer.Id)
             .OnDelete(DeleteBehavior.Restrict);
     }
 }

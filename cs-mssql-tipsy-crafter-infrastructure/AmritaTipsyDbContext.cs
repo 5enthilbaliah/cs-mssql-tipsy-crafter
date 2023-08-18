@@ -1,5 +1,6 @@
 ﻿namespace AmritaDb.Tipsy.Infrastructure;
 
+using Domain.Ecomm;
 using Domain.Purchase;
 using Domain.Retail;
 using Domain.Stock;
@@ -48,6 +49,10 @@ public class AmritaTipsyDbContext : DbContext
     public DbSet<Product> Products { get; set; } = null!;
     public DbSet<ProductImage> ProductImages { get; set; } = null!;
     public DbSet<Inventory> Inventories { get; set; } = null!;
+    
+    // Ecomm
+    public DbSet<Cart> Carts { get; set; } = null!;
+    public DbSet<CartItem> CartItems { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

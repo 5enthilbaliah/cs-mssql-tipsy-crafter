@@ -1,5 +1,7 @@
 ﻿namespace AmritaDb.Tipsy.Domain.Stock;
 
+using Ecomm;
+
 using Purchase;
 
 public class Product
@@ -16,4 +18,5 @@ public class Product
     public ICollection<ProductImage> ProductImages => null!;
     public ICollection<OrderItem> OrderItems => null!;
     public ICollection<Inventory> Inventories => null!;
+    public ICollection<CartItem> CartItems => null!;
 }

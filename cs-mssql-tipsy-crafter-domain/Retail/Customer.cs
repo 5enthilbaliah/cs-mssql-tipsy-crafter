@@ -1,5 +1,7 @@
 ﻿namespace AmritaDb.Tipsy.Domain.Retail;
 
+using Ecomm;
+
 public class Customer
 {
     public string Id { get; set; } = null!;
@@ -11,6 +13,8 @@ public class Customer
     public string State { get; set; } = null!;
     public string Country { get; set; } = null!;
     public string ZipCode { get; set; } = null!;
+
+    public Cart? Cart { get; set; }
     
     public ICollection<CustomerContact> Contacts => null!;
     public ICollection<Receipt> Receipts => null!;

@@ -22,6 +22,67 @@ namespace AmritaDb.Tipsy.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("AmritaDb.Tipsy.Domain.Ecomm.Cart", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(26)
+                        .HasColumnType("varchar(26)")
+                        .HasColumnName("id");
+
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasMaxLength(26)
+                        .HasColumnType("varchar(26)")
+                        .HasColumnName("customer_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId")
+                        .IsUnique();
+
+                    b.ToTable("cart", "ecomm");
+                });
+
+            modelBuilder.Entity("AmritaDb.Tipsy.Domain.Ecomm.CartItem", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(26)
+                        .HasColumnType("varchar(26)")
+                        .HasColumnName("id");
+
+                    b.Property<string>("CartId")
+                        .IsRequired()
+                        .HasMaxLength(26)
+                        .HasColumnType("varchar(26)")
+                        .HasColumnName("cart_id");
+
+                    b.Property<decimal>("Msrp")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m)
+                        .HasColumnName("msrp");
+
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasMaxLength(26)
+                        .HasColumnType("varchar(26)")
+                        .HasColumnName("product_id");
+
+                    b.Property<int>("Quantity")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0)
+                        .HasColumnName("qty");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("cart_item", "ecomm");
+                });
+
             modelBuilder.Entity("AmritaDb.Tipsy.Domain.Purchase.Brand", b =>
                 {
                     b.Property<string>("Id")
@@ -2213,6 +2274,36 @@ namespace AmritaDb.Tipsy.Infrastructure.Migrations
                             }));
                 });
 
+            modelBuilder.Entity("AmritaDb.Tipsy.Domain.Ecomm.Cart", b =>
+                {
+                    b.HasOne("AmritaDb.Tipsy.Domain.Retail.Customer", "Customer")
+                        .WithOne("Cart")
+                        .HasForeignKey("AmritaDb.Tipsy.Domain.Ecomm.Cart", "CustomerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("AmritaDb.Tipsy.Domain.Ecomm.CartItem", b =>
+                {
+                    b.HasOne("AmritaDb.Tipsy.Domain.Ecomm.Cart", "Cart")
+                        .WithMany("Items")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AmritaDb.Tipsy.Domain.Stock.Product", "Product")
+                        .WithMany("CartItems")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Cart");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("AmritaDb.Tipsy.Domain.Purchase.Delivery", b =>
                 {
                     b.HasOne("AmritaDb.Tipsy.Domain.Purchase.Order", "Order")
@@ -2524,6 +2615,11 @@ namespace AmritaDb.Tipsy.Infrastructure.Migrations
                     b.Navigation("Country");
                 });
 
+            modelBuilder.Entity("AmritaDb.Tipsy.Domain.Ecomm.Cart", b =>
+                {
+                    b.Navigation("Items");
+                });
+
             modelBuilder.Entity("AmritaDb.Tipsy.Domain.Purchase.Delivery", b =>
                 {
                     b.Navigation("OrderItems");
@@ -2552,6 +2648,8 @@ namespace AmritaDb.Tipsy.Infrastructure.Migrations
 
             modelBuilder.Entity("AmritaDb.Tipsy.Domain.Retail.Customer", b =>
                 {
+                    b.Navigation("Cart");
+
                     b.Navigation("Contacts");
 
                     b.Navigation("Receipts");
@@ -2601,6 +2699,8 @@ namespace AmritaDb.Tipsy.Infrastructure.Migrations
 
             modelBuilder.Entity("AmritaDb.Tipsy.Domain.Stock.Product", b =>
                 {
+                    b.Navigation("CartItems");
+
                     b.Navigation("Inventories");
 
                     b.Navigation("OrderItems");

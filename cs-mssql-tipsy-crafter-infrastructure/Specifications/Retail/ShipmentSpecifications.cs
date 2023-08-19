@@ -51,6 +51,12 @@ public class ShipmentSpecifications : IEntityTypeConfiguration<Shipment>
             .HasColumnName("date")
             .HasColumnType("datetime2(7)");
         
+        builder.Property(shipment => shipment.ModifiedBy)
+            .HasColumnName("modified_by")
+            .HasColumnType("varchar(200)")
+            .HasMaxLength(200)
+            .HasDefaultValue("SYSTEM");
+        
         builder.HasMany(shipment => shipment.ReceiptLines)
             .WithOne(receiptLine => receiptLine.Shipment)
             .HasForeignKey(receiptLine => receiptLine.ShipmentId)

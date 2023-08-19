@@ -61,5 +61,11 @@ public class ReceiptLineSpecifications : IEntityTypeConfiguration<ReceiptLine>
             .HasColumnType("int")
             .HasColumnName("qty")
             .HasDefaultValue(0);
+        
+        builder.Property(receiptLine => receiptLine.ModifiedBy)
+            .HasColumnName("modified_by")
+            .HasColumnType("varchar(200)")
+            .HasMaxLength(200)
+            .HasDefaultValue("SYSTEM");
     }
 }

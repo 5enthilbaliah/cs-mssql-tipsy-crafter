@@ -46,5 +46,11 @@ public class PaymentSpecifications : IEntityTypeConfiguration<Payment>
             .HasColumnName("memo")
             .HasColumnType("varchar(500)")
             .HasMaxLength(500);
+        
+        builder.Property(payment => payment.ModifiedBy)
+            .HasColumnName("modified_by")
+            .HasColumnType("varchar(200)")
+            .HasMaxLength(200)
+            .HasDefaultValue("SYSTEM");
     }
 }

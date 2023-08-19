@@ -12,6 +12,7 @@ public class ReceiptLine
     public decimal Discount { get; set; }
     public decimal Msrp { get; set; }
     public decimal Total { get; set; }
+    public string ModifiedBy { get; set; } = null!;
     
     public Inventory Inventory { get; set; } = null!;
     public Receipt Receipt { get; set; } = null!; 

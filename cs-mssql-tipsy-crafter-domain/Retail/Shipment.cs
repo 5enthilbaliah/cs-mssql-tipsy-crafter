@@ -10,6 +10,7 @@ public class Shipment
     public DateTime Date { get; set; }
     public string? TrackingId { get; set; }
     public bool IsDelivered { get; set; }
+    public string ModifiedBy { get; set; } = null!;
     
     public Receipt Receipt { get; set; } = null!;
     public Shipper? Shipper { get; set; }

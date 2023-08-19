@@ -36,20 +36,52 @@ public class SaleStatusSpecifications : IEntityTypeConfiguration<SaleStatus>
             .HasColumnName("description")
             .HasColumnType("varchar(200)")
             .HasMaxLength(200);
-        
+
         builder.HasMany(status => status.Receipts)
             .WithOne(receipt => receipt.Status)
             .HasForeignKey(receipt => receipt.StatusId)
             .HasPrincipalKey(status => status.Id)
             .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasData(new SaleStatus { Id = "01H7PKYDSN6HR02HNNJZQ2SEVF", Name = "In Scan", Description = "In Scan" },
-            new SaleStatus { Id = "01H7PKYES5MB6TSXVNWGHY05M8", Name = "Paid", Description = "Paid" },
+        builder.Property(saleStatus => saleStatus.ModifiedBy)
+            .HasColumnName("modified_by")
+            .HasColumnType("varchar(200)")
+            .HasMaxLength(200)
+            .HasDefaultValue("SYSTEM");
+
+        builder.HasData(
             new SaleStatus
             {
-                Id = "01H7PKYFRXQHKA0MEH3WWNB3GG", Name = "Ready for shipment", Description = "Ready for shipment"
-            }, new SaleStatus { Id = "01H7PKYGR6C0YJC0RA9YYZ6JMG", Name = "Shipped", Description = "Shipped" },
-            new SaleStatus { Id = "01H7PKYHQGXTAXYW6WMXB2QCR1", Name = "Delivered", Description = "Delivered" },
-            new SaleStatus { Id = "01H7PKYJQ2A3PQ5QJ33DWB0ZFX", Name = "Cancelled", Description = "Cancelled" });
+                Id = "01H7PKYDSN6HR02HNNJZQ2SEVF", Name = "In Scan", Description = "In Scan", ModifiedBy = "SYSTEM"
+            },
+            new SaleStatus
+            {
+                Id = "01H7PKYES5MB6TSXVNWGHY05M8", Name = "Paid", Description = "Paid", ModifiedBy = "SYSTEM"
+            },
+            new SaleStatus
+            {
+                Id = "01H7PKYFRXQHKA0MEH3WWNB3GG",
+                Name = "Ready for shipment",
+                Description = "Ready for shipment",
+                ModifiedBy = "SYSTEM"
+            },
+            new SaleStatus
+            {
+                Id = "01H7PKYGR6C0YJC0RA9YYZ6JMG", Name = "Shipped", Description = "Shipped", ModifiedBy = "SYSTEM"
+            },
+            new SaleStatus
+            {
+                Id = "01H7PKYHQGXTAXYW6WMXB2QCR1",
+                Name = "Delivered",
+                Description = "Delivered",
+                ModifiedBy = "SYSTEM"
+            },
+            new SaleStatus
+            {
+                Id = "01H7PKYJQ2A3PQ5QJ33DWB0ZFX",
+                Name = "Cancelled",
+                Description = "Cancelled",
+                ModifiedBy = "SYSTEM"
+            });
     }
 }

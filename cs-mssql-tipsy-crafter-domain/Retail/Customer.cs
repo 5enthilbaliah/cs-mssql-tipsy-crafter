@@ -13,6 +13,7 @@ public class Customer
     public string State { get; set; } = null!;
     public string Country { get; set; } = null!;
     public string ZipCode { get; set; } = null!;
+    public string ModifiedBy { get; set; } = null!;
 
     public Cart? Cart { get; set; }
     

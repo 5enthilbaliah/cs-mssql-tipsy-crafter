@@ -67,6 +67,12 @@ public class CustomerSpecifications : IEntityTypeConfiguration<Customer>
             .HasColumnName("zip_code")
             .HasColumnType("varchar(16)")
             .HasMaxLength(16);
+        
+        builder.Property(customer => customer.ModifiedBy)
+            .HasColumnName("modified_by")
+            .HasColumnType("varchar(200)")
+            .HasMaxLength(200)
+            .HasDefaultValue("SYSTEM");
 
         builder.HasMany(customer => customer.Contacts)
             .WithOne(contact => contact.Customer)

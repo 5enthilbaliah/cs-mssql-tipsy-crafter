@@ -91,6 +91,12 @@ public class StoreSpecifications : IEntityTypeConfiguration<Store>
             .HasMaxLength(3)
             .HasDefaultValue("USD");
         
+        builder.Property(store => store.ModifiedBy)
+            .HasColumnName("modified_by")
+            .HasColumnType("varchar(200)")
+            .HasMaxLength(200)
+            .HasDefaultValue("SYSTEM");
+        
         builder.HasMany(store => store.Contacts)
             .WithOne(contact => contact.Store)
             .HasForeignKey(contact => contact.StoreId)

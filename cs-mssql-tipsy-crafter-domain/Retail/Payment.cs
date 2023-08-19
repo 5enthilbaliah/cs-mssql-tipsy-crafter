@@ -9,6 +9,7 @@ public class Payment
     public string PaymentModeId { get; set; } = null!;
     public string Memo { get; set; } = null!;
     public decimal Amount { get; set; }
+    public string ModifiedBy { get; set; } = null!;
     
     public Receipt Receipt { get; set; } = null!; 
     public PaymentMode PaymentMode  { get; set; } = null!; 

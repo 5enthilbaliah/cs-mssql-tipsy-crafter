@@ -17,6 +17,7 @@ public class Inventory
     public int QuantityOnDisplay { get; set; }
     public string? AisleLocation { get; set; } 
     public DateTime LatestRestockDate { get; set; }
+    public string ModifiedBy { get; set; } = null!;
     
     public Product Product { get; set; } = null!;
     public Store Store { get; set; } = null!;

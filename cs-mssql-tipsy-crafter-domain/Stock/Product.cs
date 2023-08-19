@@ -12,6 +12,7 @@ public class Product
     public string Sku { get; set; } = null!;
     public string Upc { get; set; } = null!;
     public string ProductTypeId { get; set; } = null!;
+    public string ModifiedBy { get; set; } = null!;
     
     public ProductType ProductType { get; set; } = null!;
 

@@ -86,6 +86,12 @@ public class InventorySpecifications : IEntityTypeConfiguration<Inventory>
             .HasColumnName("latest_restock_date")
             .HasColumnType("datetime2(7)");
         
+        builder.Property(inventory => inventory.ModifiedBy)
+            .HasColumnName("modified_by")
+            .HasColumnType("varchar(200)")
+            .HasMaxLength(200)
+            .HasDefaultValue("SYSTEM");
+        
         builder.HasMany(inventory => inventory.ReceiptLines)
             .WithOne(receiptLine => receiptLine.Inventory)
             .HasForeignKey(receiptLine => receiptLine.InventoryId)

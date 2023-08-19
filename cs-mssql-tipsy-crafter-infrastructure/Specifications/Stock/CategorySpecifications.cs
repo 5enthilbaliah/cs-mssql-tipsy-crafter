@@ -47,6 +47,12 @@ public class CategorySpecifications  : IEntityTypeConfiguration<Category>
             .HasColumnType("varchar(26)")
             .HasMaxLength(26);
         
+        builder.Property(category => category.ModifiedBy)
+            .HasColumnName("modified_by")
+            .HasColumnType("varchar(200)")
+            .HasMaxLength(200)
+            .HasDefaultValue("SYSTEM");
+        
         builder.HasMany(category => category.Children)
             .WithOne(child => child.ParentCategory)
             .HasForeignKey(child => child.ParentId)

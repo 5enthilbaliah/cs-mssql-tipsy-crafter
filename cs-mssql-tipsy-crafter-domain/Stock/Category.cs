@@ -6,8 +6,9 @@ public class Category
     public string Name { get; set; } = null!;
     public string Description { get; set; } = null!;
     public string Slug { get; set; } = null!;
-    
     public string? ParentId { get; set; }
+    public string ModifiedBy { get; set; } = null!;
+    
     public Category? ParentCategory { get; set; }
     
     public ICollection<Category> Children => null!;

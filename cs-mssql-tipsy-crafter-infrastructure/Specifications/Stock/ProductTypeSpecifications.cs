@@ -42,6 +42,12 @@ public class ProductTypeSpecifications : IEntityTypeConfiguration<ProductType>
             .HasColumnType("varchar(26)")
             .HasMaxLength(26);
         
+        builder.Property(productType => productType.ModifiedBy)
+            .HasColumnName("modified_by")
+            .HasColumnType("varchar(200)")
+            .HasMaxLength(200)
+            .HasDefaultValue("SYSTEM");
+        
         builder.HasMany(productType => productType.Products)
             .WithOne(product => product.ProductType)
             .HasForeignKey(productType => productType.ProductTypeId)

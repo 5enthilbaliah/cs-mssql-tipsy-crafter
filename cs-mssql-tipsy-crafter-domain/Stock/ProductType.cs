@@ -6,6 +6,7 @@ public class ProductType
     public string Name { get; set; } = null!;
     public string Description { get; set; } = null!;
     public string CategoryId { get; set; } = null!;
+    public string ModifiedBy { get; set; } = null!;
     
     public Category Category { get; set; } = null!;
     public ICollection<Product> Products => null!;

@@ -41,5 +41,11 @@ public class BrandSpecifications : IEntityTypeConfiguration<Brand>
             .HasColumnName("website_url")
             .HasColumnType("varchar(512)")
             .HasMaxLength(512);
+        
+        builder.Property(brand => brand.ModifiedBy)
+            .HasColumnName("modified_by")
+            .HasColumnType("varchar(200)")
+            .HasMaxLength(200)
+            .HasDefaultValue("SYSTEM");
     }
 }

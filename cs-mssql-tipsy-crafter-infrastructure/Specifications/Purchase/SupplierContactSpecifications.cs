@@ -51,5 +51,11 @@ public class SupplierContactSpecifications : IEntityTypeConfiguration<SupplierCo
             .HasColumnName("contact_type_id")
             .HasColumnType("varchar(26)")
             .HasMaxLength(26);
+        
+        builder.Property(contact => contact.ModifiedBy)
+            .HasColumnName("modified_by")
+            .HasColumnType("varchar(200)")
+            .HasMaxLength(200)
+            .HasDefaultValue("SYSTEM");
     }
 }

@@ -10,6 +10,7 @@ public class Settlement
     public string Memo { get; set; } = null!;
     public string PaidCurrency { get; set; } = null!;
     public decimal Paid { get; set; }
+    public string ModifiedBy { get; set; } = null!;
     
     public Order Order { get; set; } = null!; 
     public PaymentMode PaymentMode  { get; set; } = null!; 

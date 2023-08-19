@@ -86,6 +86,12 @@ public class SupplierSpecifications : IEntityTypeConfiguration<Supplier>
             .HasMaxLength(3)
             .HasDefaultValue("USD");
         
+        builder.Property(supplier => supplier.ModifiedBy)
+            .HasColumnName("modified_by")
+            .HasColumnType("varchar(200)")
+            .HasMaxLength(200)
+            .HasDefaultValue("SYSTEM");
+        
         builder.HasMany(supplier => supplier.Contacts)
             .WithOne(contact => contact.Supplier)
             .HasForeignKey(contact => contact.SupplierId)

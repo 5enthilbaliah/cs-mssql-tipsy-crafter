@@ -56,6 +56,12 @@ public class DeliverySpecifications : IEntityTypeConfiguration<Delivery>
             .HasColumnName("date")
             .HasColumnType("datetime2(7)");
         
+        builder.Property(delivery => delivery.ModifiedBy)
+            .HasColumnName("modified_by")
+            .HasColumnType("varchar(200)")
+            .HasMaxLength(200)
+            .HasDefaultValue("SYSTEM");
+        
         builder.HasMany(delivery => delivery.OrderItems)
             .WithOne(orderItem => orderItem.Delivery)
             .HasForeignKey(orderItem => orderItem.DeliveryId)

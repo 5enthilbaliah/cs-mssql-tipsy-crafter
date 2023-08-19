@@ -15,6 +15,7 @@ public class Supplier
     public decimal? Latitude { get; set; }
     public decimal? Longitude { get; set; }
     public string PreferredCurrency { get; set; } = null!;
+    public string ModifiedBy { get; set; } = null!;
     
     public ICollection<SupplierContact> Contacts => null!;
     public ICollection<Order> Orders => null!;

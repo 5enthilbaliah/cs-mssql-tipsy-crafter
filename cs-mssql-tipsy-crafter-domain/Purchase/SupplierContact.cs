@@ -10,7 +10,8 @@ public class SupplierContact
     public bool IsPrimary { get; set; }
     public string SupplierId { get; set; } = null!;
     public string ContactTypeId { get; set; } = null!;
-    
+    public string ModifiedBy { get; set; } = null!;
+
     public Supplier Supplier { get; set; } = null!;
     public ContactType ContactType { get; set; } = null!;
 }

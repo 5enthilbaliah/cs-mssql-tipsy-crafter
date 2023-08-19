@@ -83,5 +83,11 @@ public class OrderItemSpecifications : IEntityTypeConfiguration<OrderItem>
             .HasColumnType("money")
             .HasColumnName("total_amount")
             .HasDefaultValue(0);
+        
+        builder.Property(orderItem => orderItem.ModifiedBy)
+            .HasColumnName("modified_by")
+            .HasColumnType("varchar(200)")
+            .HasMaxLength(200)
+            .HasDefaultValue("SYSTEM");
     }
 }

@@ -16,6 +16,7 @@ public class OrderItem
     public string TotalCurrency { get; set; } = null!;
     public decimal Total { get; set; }
     public decimal StoreTotal { get; set; }
+    public string ModifiedBy { get; set; } = null!;
 
     public Product Product { get; set; } = null!;
     public Order Order { get; set; } = null!;

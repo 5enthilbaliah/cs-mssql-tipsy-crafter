@@ -11,6 +11,7 @@ public class Delivery
     public DateTime Date { get; set; }
     public string? TrackingId { get; set; }
     public bool IsDelivered { get; set; }
+    public string ModifiedBy { get; set; } = null!;
     
     public Order Order { get; set; } = null!;
     public Shipper? Shipper { get; set; }

@@ -52,5 +52,11 @@ public class SettlementSpecifications : IEntityTypeConfiguration<Settlement>
             .HasColumnName("memo")
             .HasColumnType("varchar(500)")
             .HasMaxLength(500);
+        
+        builder.Property(settlement => settlement.ModifiedBy)
+            .HasColumnName("modified_by")
+            .HasColumnType("varchar(200)")
+            .HasMaxLength(200)
+            .HasDefaultValue("SYSTEM");
     }
 }

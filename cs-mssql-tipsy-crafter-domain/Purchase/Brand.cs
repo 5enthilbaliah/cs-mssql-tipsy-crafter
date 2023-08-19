@@ -6,4 +6,5 @@ public class Brand
     public string Name { get; set; } = null!;
     public string Description { get; set; } = null!;
     public string? WebsiteUrl { get; set; }
+    public string ModifiedBy { get; set; } = null!;
 }

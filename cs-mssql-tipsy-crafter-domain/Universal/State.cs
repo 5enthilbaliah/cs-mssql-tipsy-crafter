@@ -6,6 +6,7 @@ public class State
     public string CountryId { get; set; } = null!;
     public string Name { get; set; } = null!;
     public string Code { get; set; } = null!;
+    public string ModifiedBy { get; set; } = null!;
     
     public Country Country { get; set; } = null!;
 }

@@ -36,25 +36,50 @@ public class PaymentModeSpecifications : IEntityTypeConfiguration<PaymentMode>
             .HasColumnName("description")
             .HasColumnType("varchar(200)")
             .HasMaxLength(200);
-        
+
+        builder.Property(paymentMode => paymentMode.ModifiedBy)
+            .HasColumnName("modified_by")
+            .HasColumnType("varchar(200)")
+            .HasMaxLength(200)
+            .HasDefaultValue("SYSTEM");
+
         builder.HasMany(paymentMode => paymentMode.Settlements)
             .WithOne(settlement => settlement.PaymentMode)
             .HasForeignKey(settlement => settlement.PaymentModeId)
             .HasPrincipalKey(paymentMode => paymentMode.Id)
             .OnDelete(DeleteBehavior.Restrict);
-        
+
         builder.HasMany(paymentMode => paymentMode.Payments)
             .WithOne(payment => payment.PaymentMode)
             .HasForeignKey(payment => payment.PaymentModeId)
             .HasPrincipalKey(paymentMode => paymentMode.Id)
             .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasData(new PaymentMode { Id = "01H7PCVP1HGHM93SX4HSW8EM2B", Name = "Cash", Description = "Cash" },
-            new PaymentMode { Id = "01H7PCVQ1ERMXJJND16HKKHTKQ", Name = "Cheque", Description = "Cheque / Check" },
+        builder.HasData(
             new PaymentMode
             {
-                Id = "01H7PCVR0R9723KKDRKGSRPRYS", Name = "Wire Transfer", Description = "Wire Transfer"
+                Id = "01H7PCVP1HGHM93SX4HSW8EM2B", Name = "Cash", Description = "Cash", ModifiedBy = "SYSTEM"
             },
-            new PaymentMode { Id = "01H7PCVS01J4ZANSQHEKV658H1", Name = "Credit Card", Description = "Credit Card" });
+            new PaymentMode
+            {
+                Id = "01H7PCVQ1ERMXJJND16HKKHTKQ",
+                Name = "Cheque",
+                Description = "Cheque / Check",
+                ModifiedBy = "SYSTEM"
+            },
+            new PaymentMode
+            {
+                Id = "01H7PCVR0R9723KKDRKGSRPRYS",
+                Name = "Wire Transfer",
+                Description = "Wire Transfer",
+                ModifiedBy = "SYSTEM"
+            },
+            new PaymentMode
+            {
+                Id = "01H7PCVS01J4ZANSQHEKV658H1",
+                Name = "Credit Card",
+                Description = "Credit Card",
+                ModifiedBy = "SYSTEM"
+            });
     }
 }

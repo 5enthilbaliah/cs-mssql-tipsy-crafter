@@ -9,6 +9,7 @@ public class Country
     public short? NumericCode { get; set; }
     public short PhoneCode { get; set; }
     public string CurrencyCode { get; set; } = null!;
+    public string ModifiedBy { get; set; } = null!;
     
     public ICollection<State> States => null!;
 }

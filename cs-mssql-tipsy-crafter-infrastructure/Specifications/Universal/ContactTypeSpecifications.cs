@@ -36,28 +36,49 @@ public class ContactTypeSpecifications : IEntityTypeConfiguration<ContactType>
             .HasColumnName("description")
             .HasColumnType("varchar(200)")
             .HasMaxLength(200);
-        
+
         builder.HasMany(contactType => contactType.StoreContacts)
             .WithOne(contact => contact.ContactType)
             .HasForeignKey(contact => contact.ContactTypeId)
             .HasPrincipalKey(contactType => contactType.Id)
             .OnDelete(DeleteBehavior.Restrict);
-        
+
         builder.HasMany(contactType => contactType.SupplierContacts)
             .WithOne(contact => contact.ContactType)
             .HasForeignKey(contact => contact.ContactTypeId)
             .HasPrincipalKey(contactType => contactType.Id)
             .OnDelete(DeleteBehavior.Restrict);
-        
+
         builder.HasMany(contactType => contactType.CustomerContacts)
             .WithOne(contact => contact.ContactType)
             .HasForeignKey(contact => contact.ContactTypeId)
             .HasPrincipalKey(contactType => contactType.Id)
             .OnDelete(DeleteBehavior.Restrict);
 
+        builder.Property(contactType => contactType.ModifiedBy)
+            .HasColumnName("modified_by")
+            .HasColumnType("varchar(200)")
+            .HasMaxLength(200)
+            .HasDefaultValue("SYSTEM");
+
         builder.HasData(
-            new ContactType { Id = "01H7PBQ3MBB6ZX1Y39TV6KPM5T", Name = "Phone", Description = "Phone Number" },
-            new ContactType { Id = "01H7PBQ3MQ33DF64P8FDZJ6CCG", Name = "Email", Description = "Email Address" },
-            new ContactType { Id = "01H7PBQ3MQRT5Q538QR2VCQZZT", Name = "Fax", Description = "Fax Number" });
+            new ContactType
+            {
+                Id = "01H7PBQ3MBB6ZX1Y39TV6KPM5T",
+                Name = "Phone",
+                Description = "Phone Number",
+                ModifiedBy = "SYSTEM"
+            },
+            new ContactType
+            {
+                Id = "01H7PBQ3MQ33DF64P8FDZJ6CCG",
+                Name = "Email",
+                Description = "Email Address",
+                ModifiedBy = "SYSTEM"
+            },
+            new ContactType
+            {
+                Id = "01H7PBQ3MQRT5Q538QR2VCQZZT", Name = "Fax", Description = "Fax Number", ModifiedBy = "SYSTEM"
+            });
     }
 }

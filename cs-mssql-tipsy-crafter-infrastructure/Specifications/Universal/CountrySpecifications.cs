@@ -54,6 +54,12 @@ public class CountrySpecifications : IEntityTypeConfiguration<Country>
             .HasColumnName("currency_code")
             .HasColumnType("char(3)")
             .HasMaxLength(3);
+        
+        builder.Property(country => country.ModifiedBy)
+            .HasColumnName("modified_by")
+            .HasColumnType("varchar(200)")
+            .HasMaxLength(200)
+            .HasDefaultValue("SYSTEM");
 
         builder.HasMany(country => country.States)
             .WithOne(state => state.Country)
@@ -70,7 +76,8 @@ public class CountrySpecifications : IEntityTypeConfiguration<Country>
                 Iso3Code = "USA",
                 IsoCode = "US",
                 NumericCode = 840,
-                PhoneCode = 1
+                PhoneCode = 1,
+                ModifiedBy = "SYSTEM"
             },
             new Country
             {
@@ -80,7 +87,8 @@ public class CountrySpecifications : IEntityTypeConfiguration<Country>
                 Iso3Code = "GBR",
                 IsoCode = "GB",
                 NumericCode = 826,
-                PhoneCode = 44
+                PhoneCode = 44,
+                ModifiedBy = "SYSTEM"
             },
             new Country
             {
@@ -90,7 +98,8 @@ public class CountrySpecifications : IEntityTypeConfiguration<Country>
                 Iso3Code = "FRA",
                 IsoCode = "FR",
                 NumericCode = 250,
-                PhoneCode = 33
+                PhoneCode = 33,
+                ModifiedBy = "SYSTEM"
             }, new Country
             {
                 Id = "01H7PBQ3MRF96R5ES7EYPWDTYX",
@@ -99,7 +108,8 @@ public class CountrySpecifications : IEntityTypeConfiguration<Country>
                 Iso3Code = "MEX",
                 IsoCode = "MX",
                 NumericCode = 484,
-                PhoneCode = 52
+                PhoneCode = 52,
+                ModifiedBy = "SYSTEM"
             });
     }
 }

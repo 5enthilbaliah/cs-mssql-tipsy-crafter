@@ -43,5 +43,11 @@ public class StateSpecifications : IEntityTypeConfiguration<State>
             .HasColumnName("name")
             .HasColumnType("varchar(80)")
             .HasMaxLength(80);
+        
+        builder.Property(state => state.ModifiedBy)
+            .HasColumnName("modified_by")
+            .HasColumnType("varchar(200)")
+            .HasMaxLength(200)
+            .HasDefaultValue("SYSTEM");
     }
 }
